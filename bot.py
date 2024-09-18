@@ -14,16 +14,8 @@ TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 def get_datuak():
     url = f'http://tiñelu.eus'
     response = requests.get(url)
-    datuak_data = response.json()
-
-    if response.status_code == 200:
-
-        datuak_report = "Unable to fetch datuak data at the moment."
-    else:
-        datuak_report = "Unable to fetch datuak data at the moment."
-    
-    return {'text': datuak_report, 'img': datuak_img}
-
+    datuak_report = "Unable to fetch datuak data at the moment."
+    return {'text': datuak_report}
 
 async def send_message(message):
     bot = Bot(token=TELEGRAM_BOT_TOKEN)
