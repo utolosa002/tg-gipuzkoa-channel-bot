@@ -28,7 +28,7 @@ async def send_photo(photo, caption):
 
 async def main():
     datuak = get_datuak()
-    message = f"{datuak}\n"
+    message = f"{datuak}"
     await send_message(message)
 
 if __name__ == '__main__':
