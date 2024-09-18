@@ -11,7 +11,7 @@ from hashlib import sha256
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
-def get_data():
+def get_datuak():
     url = f'http://tiñelu.eus'
     response = requests.get(url)
     datuak_data = response.json()
