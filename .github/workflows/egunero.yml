@@ -1,8 +1,8 @@
-name: Eguardi Bot
+name: EguneroBot
 
 on:
     schedule:
-        - cron: '0 13 * * *'
+        - cron: '0 19 * * *'
     push:
         branches:
             - main
