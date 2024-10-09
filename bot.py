@@ -20,7 +20,6 @@ def get_news():
     results = soup.find(id="actualidad-ultimasnoticias")
     job_elements = results.find_all("div", class_="col-12 col-md-6 col-lg-12 mb-5")
     job_elements2= results.find_all("div", class_="col-12 col-md-6 col-lg-4 mb-3")
-    i=0
     albisteak=[]
 
   #  print(job_elements)
@@ -31,10 +30,10 @@ def get_news():
         desk_element  = job_element.find("p", class_="izfe-ultimas-noticias-resumen-destacada")
         data_element  = job_element.find("p", class_="small izfe-semibold text-white m-0 mr-2")
         img_element   = job_element.find_all("img")
-        url_element   = job_element.find_all(href=True)
+        url_element   = title_element.find(href=True)
         new_datatime = datetime.strptime(data_element.text, '%Y/%m/%d')
         albistea.append(img_element[0]['src'])
-        albistea.append(title_element.text.strip()+ "\n" + url_element[1]['href'])
+        albistea.append(title_element.text.strip()+ "\n" + url_element['href'])
         albistea.append(new_datatime)
         albisteak.append(albistea)
         
@@ -43,10 +42,10 @@ def get_news():
         title_element = job_element.find("h3", class_="izfe-h3")
         data_element  = job_element.find("p", class_="small izfe-semibold text-white m-0 mr-2")
         img_element   = job_element.find_all("img")
-        url_element   = job_element.find_all(href=True)
+        url_element   = title_element.find(href=True)
         new_datatime = datetime.strptime(data_element.text, '%Y/%m/%d')
         albistea.append(img_element[0]['src'])
-        albistea.append(title_element.text.strip()+ "\n" + url_element[1]['href'])
+        albistea.append(title_element.text.strip()+ "\n" + url_element['href'])
         albistea.append(new_datatime)
         albisteak.append(albistea)
     return albisteak
