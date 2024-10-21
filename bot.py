@@ -2,6 +2,7 @@ import os
 import requests
 from telegram import Bot
 import asyncio
+import urllib.parse
 import hmac
 import base64
 import time
@@ -10,7 +11,8 @@ from hashlib import sha256
 from bs4 import BeautifulSoup
 from datetime import * 
 
-TELEGRAM_BOT_TOKEN =  os.getenv('TELEGRAM_BOT_TOKEN')
+
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
 def get_news():
@@ -29,10 +31,10 @@ def get_news():
         title_element = job_element.find("h3", class_="izfe-title")
         desk_element  = job_element.find("p", class_="izfe-ultimas-noticias-resumen-destacada")
         data_element  = job_element.find("p", class_="small izfe-semibold text-white m-0 mr-2")
-        img_element   = job_element.find_all("img")
+        img_element   = job_element.find_all("source")
         url_element   = title_element.find(href=True)
         new_datatime = datetime.strptime(data_element.text, '%Y/%m/%d')
-        albistea.append(img_element[0]['src'])
+        albistea.append("https://gipuzkoa.eus/"+img_element[0]['srcset'])
         albistea.append(title_element.text.strip()+ "\n" + url_element['href'])
         albistea.append(new_datatime)
         albisteak.append(albistea)
@@ -41,15 +43,14 @@ def get_news():
         albistea=[]
         title_element = job_element.find("h3", class_="izfe-h3")
         data_element  = job_element.find("p", class_="small izfe-semibold text-white m-0 mr-2")
-        img_element   = job_element.find_all("img")
+        img_element   = job_element.find_all("source")
         url_element   = title_element.find(href=True)
         new_datatime = datetime.strptime(data_element.text, '%Y/%m/%d')
-        albistea.append(img_element[0]['src'])
+        albistea.append("https://gipuzkoa.eus/"+img_element[0]['srcset'])
         albistea.append(title_element.text.strip()+ "\n" + url_element['href'])
         albistea.append(new_datatime)
         albisteak.append(albistea)
     return albisteak
-
     
 
 async def send_message(message):
