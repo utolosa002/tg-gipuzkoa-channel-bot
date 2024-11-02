@@ -32,9 +32,13 @@ def get_news():
         desk_element  = job_element.find("p", class_="izfe-ultimas-noticias-resumen-destacada")
         data_element  = job_element.find("p", class_="small izfe-semibold text-white m-0 mr-2")
         img_element   = job_element.find_all("source")
+        if len(img_element) == 0:
+            img_element   = job_element.find_all("img")
+            albistea.append(img_element[0]['src'])
+        else:
+            albistea.append("https://gipuzkoa.eus/"+img_element[0]['srcset'])
         url_element   = title_element.find(href=True)
         new_datatime = datetime.strptime(data_element.text, '%Y/%m/%d')
-        albistea.append("https://gipuzkoa.eus/"+img_element[0]['srcset'])
         albistea.append(title_element.text.strip()+ "\n" + url_element['href'])
         albistea.append(new_datatime)
         albisteak.append(albistea)
@@ -44,9 +48,13 @@ def get_news():
         title_element = job_element.find("h3", class_="izfe-h3")
         data_element  = job_element.find("p", class_="small izfe-semibold text-white m-0 mr-2")
         img_element   = job_element.find_all("source")
+        if len(img_element) == 0:
+            img_element   = job_element.find_all("img")
+            albistea.append(img_element[0]['src'])
+        else:
+            albistea.append("https://gipuzkoa.eus/"+img_element[0]['srcset'])
         url_element   = title_element.find(href=True)
         new_datatime = datetime.strptime(data_element.text, '%Y/%m/%d')
-        albistea.append("https://gipuzkoa.eus/"+img_element[0]['srcset'])
         albistea.append(title_element.text.strip()+ "\n" + url_element['href'])
         albistea.append(new_datatime)
         albisteak.append(albistea)
